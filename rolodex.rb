@@ -20,12 +20,18 @@ class Rolodex
 
 	def select(id_num)
 		correct_index = @contacts.index {|contact| contact.id == id_num}
-		return @contacts.fetch(correct_index)
+		if correct_index != nil
+			return @contacts.fetch(correct_index)
+		else
+		end # if correct_index 
 	end # def search
 
 	def delete_contact(id_num)
 		correct_index = @contacts.index {|contact| contact.id == id_num}
-		return @contacts.delete_at(correct_index)
+		if correct_index != nil
+			return @contacts.delete_at(correct_index)
+		else
+		end # if correct_index
 	end # def delete_contact
 
 	def modify_contact(id_num, att_to_modify, new_att_value)
