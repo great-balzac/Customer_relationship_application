@@ -18,23 +18,12 @@ class Rolodex
 		@contacts
 	end # def all
 
-	def search(search_input)
-
-		# DEBUG
-		puts "Searchinput to i #{search_input.to_i}"
-
-		@contacts.each do |search_name|
-			# DEBUG
-			puts "Searchname id #{search_name.id}"
-
-			if search_name.id == search_input.to_i
-				puts "Contact found!"
-				puts "#{search_name.id} being returned" # DEBUG
-				found_contact = search_name
-			else
-			end # case search_name
-		end # @contacts.each
-		return found_contact
+	def select(id_num)
+		return @contacts.fetch(id_num-1000)
 	end # def search
+
+	def delete_contact(id_num)
+		return @contacts.delete_at(id_num-1000)
+	end
 
 end # class Rolodex

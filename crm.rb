@@ -56,17 +56,15 @@ class CRM
 		puts "Display contact"
 		puts "Which contact to display?"
 		puts "Enter ID#: "
-		search_input = gets.chomp
+		input_id = gets.chomp
+		input_id = input_id.to_i
+		selected_contact = @rolodex.select(input_id)
 		
-		search_result = @rolodex.search(search_input)
-		if search_result == nil
-			print "Contact not found!"
-		else
-			display_single_contact(search_result)
-		end
-
-		# DEBUG
-		puts search_result
+			if selected_contact != nil
+				display_single_contact(selected_contact)
+			else
+				puts "Contact not found!"
+			end # if selected_contact
 	end # display_contact
 
 	def display_contact_attribute
@@ -77,8 +75,14 @@ class CRM
 		puts "Delete contact"
 		puts "Which contact to delete?"
 		puts "Enter ID#: "
-
-
+		input_id = gets.chomp
+		input_id = input_id.to_i
+		selected_contact = @rolodex.delete_contact(input_id)
+			if selected_contact != nil
+				puts "Contact #{selected_contact.id} deleted!"
+			else
+				puts "Contact not found! Nothing deleted."
+			end # if selected_contact
 	end # def delete_a_contact
 
 	def exit
