@@ -34,25 +34,33 @@ class CRM
 	end # def add_contact
 
 	def modify_contact
-		puts "Modify contact attribute"
-		puts "Which contact to display?"
-		puts "Enter ID#: "
-		input_id = gets.chomp
-		input_id = input_id.to_i
-		puts "Select attribute to modify"
-		puts "1 for first name"
-		puts "2 for last name"
-		puts "3 for email"
-		puts "4 for notes"
-		att_to_modify = gets.chomp.to_i
-		puts "Enter new attribute value: "
-		new_att_value = gets.chomp
-		requested_att = @rolodex.modify_contact(input_id, att_to_modify, new_att_value)
-			if requested_att != nil
-				puts "#{requested_att.id} modified"
-			else
-				puts "Contact not found!"
-			end # if selected_contact
+		while true
+			puts "Modify contact attribute"
+			puts "Which contact to modify?"
+			puts "Enter ID#: "
+			input_id = gets.chomp
+			input_id = input_id.to_i
+			puts "Select attribute to modify"
+			puts "1 for first name"
+			puts "2 for last name"
+			puts "3 for email"
+			puts "4 for notes"
+			puts "5 to cancel"
+			att_to_modify = gets.chomp.to_i
+				break if att_to_modify == 5
+				break if att_to_modify < 1
+				break if att_to_modify > 5
+			puts "Enter new attribute value: "
+			new_att_value = gets.chomp
+			requested_att = @rolodex.modify_contact(input_id, att_to_modify, new_att_value)
+				if requested_att != nil
+					puts "#{requested_att.id} modified"
+				else
+					puts "Contact not found!"
+				end # if requested_att
+			break if requested_att != nil
+			break if requested_att == nil
+		end # while true
 	end # def modify_contact
 
 	def display_all_contacts
@@ -85,23 +93,31 @@ class CRM
 	end # display_contact
 
 	def display_contact_attribute
-		puts "Display contact attribute"
-		puts "Which contact to display?"
-		puts "Enter ID#: "
-		input_id = gets.chomp
-		input_id = input_id.to_i
-		puts "Select attribute to display"
-		puts "1 for first name"
-		puts "2 for last name"
-		puts "3 for email"
-		puts "4 for notes"
-		att_to_display = gets.chomp.to_i
-		requested_att = @rolodex.display_attribute(input_id, att_to_display)
-			if requested_att != nil
-				puts "#{requested_att}"
-			else
-				puts "Contact not found!"
-			end # if selected_contact
+		while true
+			puts "Display contact attribute"
+			puts "Which contact to display?"
+			puts "Enter ID#: "
+			input_id = gets.chomp
+			input_id = input_id.to_i
+			puts "Select attribute to display"
+			puts "1 for first name"
+			puts "2 for last name"
+			puts "3 for email"
+			puts "4 for notes"
+			puts "5 to cancel"
+			att_to_display = gets.chomp.to_i
+				break if att_to_display == 5
+				break if att_to_display < 1
+				break if att_to_display > 5
+			requested_att = @rolodex.display_attribute(input_id, att_to_display)
+				if requested_att != nil
+					puts "#{requested_att}"
+				else
+					puts "Contact not found!"
+				end # if requested_att
+			break if requested_att != nil
+			break if requested_att == nil
+		end # while true
 	end # display_contact_attribute
 
 	def delete_a_contact
