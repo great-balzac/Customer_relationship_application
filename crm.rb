@@ -35,6 +35,40 @@ class CRM
 
 	def modify_contact
 		puts "Modify contact"
+		puts "Which contact to modify?"
+		puts "Enter ID#: "
+		input_id = gets.chomp
+		input_id = input_id.to_i
+		puts "Select attribute to modify"
+		puts "1 for first name"
+		puts "2 for last name"
+		puts "3 for email"
+		puts "4 for notes"
+		att_to_modify = gets.chomp.to_i
+		puts "Enter new value:"
+		new_att_value = gets.chomp
+
+		case att_to_modify
+		when att_to_modify == 1
+			att_to_modify = :fname
+		when att_to_modify == 2
+			att_to_modify = :lname
+		when att_to_modify == 3
+			att_to_modify = :email
+		when att_to_modify = 4
+			att_to_modify = :notes
+		else
+			"Invalid input!"
+			modify_contact
+		end # case
+
+		selected_contact = @rolodex.modify_contact(input_id, att_to_modify, new_att_value)
+			if selected_contact != nil
+				puts "Contact #{selected_contact.id} modified!"
+				display_single_contact(selected_contact)
+			else
+				puts "Contact not found!"
+			end # if selected_contact
 	end # def modify_contact
 
 	def display_all_contacts
@@ -59,7 +93,6 @@ class CRM
 		input_id = gets.chomp
 		input_id = input_id.to_i
 		selected_contact = @rolodex.select(input_id)
-		
 			if selected_contact != nil
 				display_single_contact(selected_contact)
 			else
@@ -69,6 +102,22 @@ class CRM
 
 	def display_contact_attribute
 		puts "Display contact attribute"
+		puts "Which contact to display?"
+		puts "Enter ID#: "
+		input_id = gets.chomp
+		input_id = input_id.to_i
+		puts "Select attribute to display"
+		puts "1 for first name"
+		puts "2 for last name"
+		puts "3 for email"
+		puts "4 for notes"
+		att_to_display = gets.chomp.to_i
+		requested_att = @rolodex.display_attribute(input_id, att_to_display)
+			if requested_att != nil
+				puts "#{requested_att}"
+			else
+				puts "Contact not found!"
+			end # if selected_contact
 	end # display_contact_attribute
 
 	def delete_a_contact
