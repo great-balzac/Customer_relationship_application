@@ -19,17 +19,22 @@ class Rolodex
 	end # def all
 
 	def search(search_input)
-		found_contact = nil
+
+		# DEBUG
+		puts "Searchinput to i #{search_input.to_i}"
+
 		@contacts.each do |search_name|
-			if search_name.fname.downcase == search_input
-				"Contact found!"
+			# DEBUG
+			puts "Searchname id #{search_name.id}"
+
+			if search_name.id == search_input.to_i
+				puts "Contact found!"
+				puts "#{search_name.id} being returned" # DEBUG
 				found_contact = search_name
 			else
-				found_contact = nil
 			end # case search_name
-		return found_contact
 		end # @contacts.each
-
+		return found_contact
 	end # def search
 
 end # class Rolodex

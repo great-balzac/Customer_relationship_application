@@ -44,26 +44,29 @@ class CRM
 		end
 	end # def display_all_contacts
 
-	def display_single_contact(search_name)
-		print "#{search_name.lname}, #{search_name.fname}"
-		print "\n-- Email: #{search_name.email}"
-		print "\n-- Notes:"
-		print "\n  -#{search_name.notes}"
+	def display_single_contact(contact_info)
+		print "\nID #: #{contact_info.id} "
+		print "#{contact_info.lname}, #{contact_info.fname}. "
+		print "Email: #{contact_info.email}"
+		print "\n--Notes:"
+		print "\n -#{contact_info.notes}"
 	end # def display_single_contact
 
 	def display_contact
 		puts "Display contact"
 		puts "Which contact to display?"
-		puts "Enter first name: "
-		search_input = gets.chomp.downcase
+		puts "Enter ID#: "
+		search_input = gets.chomp
 		
-		search_name = @rolodex.search(search_input)
-		if search_name == nil
-		print "Contact not found!"
-			main_menu
+		search_result = @rolodex.search(search_input)
+		if search_result == nil
+			print "Contact not found!"
 		else
-			display_single_contact(search_name)
+			display_single_contact(search_result)
 		end
+
+		# DEBUG
+		puts search_result
 	end # display_contact
 
 	def display_contact_attribute
@@ -72,6 +75,10 @@ class CRM
 
 	def delete_a_contact
 		puts "Delete contact"
+		puts "Which contact to delete?"
+		puts "Enter ID#: "
+
+
 	end # def delete_a_contact
 
 	def exit
