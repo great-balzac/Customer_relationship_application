@@ -19,11 +19,13 @@ class Rolodex
 	end # def all
 
 	def select(id_num)
-		return @contacts.fetch(id_num-1000)
+		correct_index = @contacts.index {|contact| contact.id == id_num}
+		return @contacts.fetch(correct_index)
 	end # def search
 
 	def delete_contact(id_num)
-		return @contacts.delete_at(id_num-1000)
+		correct_index = @contacts.index {|contact| contact.id == id_num}
+		return @contacts.delete_at(correct_index)
 	end
 
 end # class Rolodex
